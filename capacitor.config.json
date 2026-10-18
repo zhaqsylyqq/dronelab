@@ -1,0 +1,13 @@
+{
+  "appId": "com.dronelab.app",
+  "appName": "DroneLab",
+  "webDir": "www",
+  "backgroundColor": "#090b16",
+  "plugins": {
+    "SystemBars": {
+      "style": "DARK",
+      "insetsHandling": "css",
+      "initialViewportFitValueHint": "cover"
+    }
+  }
+}

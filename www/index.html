@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <!-- viewport-fit=cover — разрешаем странице занять весь экран телефона,
+       включая место у чёлки. Отступы от чёлки мы делаем сами в style.css. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#090b16">
+  <!-- Говорим телефону, что у нас тёмная тема (тёмные системные элементы, например списки выбора). -->
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="DroneLab — интерактивный конструктор собственного дрона.">
+  <title>DroneLab — Конструктор дронов</title>
+
+  <!-- Все стили лежат в отдельном файле -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+<header>
+  <div class="container nav">
+    <a class="logo" href="#home">
+      <span class="logo-icon">✦</span>
+      Drone<span>Lab</span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="#builder">Конструктор</a>
+      <a href="#parts">Компоненты</a>
+      <a href="#guide">Сборка</a>
+    </nav>
+
+    <a class="button" href="#builder">Создать дрон ↗</a>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <section class="hero" id="home">
+      <div class="reveal">
+        <div class="eyebrow"><span class="dot"></span> DRONE ENGINEERING STUDIO</div>
+        <h1>Твоя идея.<br>Твой дрон.<br><span class="gradient-text">Твои правила.</span></h1>
+        <p>
+          Проектируй собственный беспилотник, изучай компоненты
+          и подбирай конфигурацию в интерактивном 3D-конструкторе.
+          Инженерия начинается с идеи.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button" href="#builder">Открыть конструктор →</a>
+          <a class="button secondary" href="#parts">Изучить детали</a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat"><strong>3D</strong><small>Модель в реальном времени</small></div>
+          <div class="stat"><strong>6+</strong><small>Категорий компонентов</small></div>
+          <div class="stat"><strong>∞</strong><small>Идей для сборки</small></div>
+        </div>
+      </div>
+
+      <div class="visual reveal">
+        <div id="heroCanvas"></div>
+        <div class="float-tag tag-one">
+          <small>СИСТЕМА</small><strong>● ONLINE</strong>
+        </div>
+        <div class="float-tag tag-two">
+          <small>КОНФИГУРАЦИЯ</small><strong id="heroConfig">PRO / QUAD</strong>
+        </div>
+      </div>
+    </section>
+
+    <section id="builder">
+      <div class="section-head">
+        <div>
+          <h2>Собери свою машину</h2>
+          <p>Меняй компоненты и наблюдай за своей конфигурацией.</p>
+        </div>
+        <span class="pill">● КОНСТРУКТОР АКТИВЕН</span>
+      </div>
+
+      <div class="builder-grid">
+        <div>
+          <div class="panel">
+            <div class="panel-head">
+              <strong>3D VIEWPORT / DRONE-01</strong>
+              <small>Перетаскивай для вращения</small>
+            </div>
+            <div id="builderCanvas"></div>
+            <div class="viewer-controls">
+              <button class="small-button" id="resetView">↻ Сбросить вид</button>
+              <button class="small-button" id="toggleSpin">Ⅱ Остановить вращение</button>
+              <button class="small-button" id="toggleProps">◉ Пропеллеры: вкл.</button>
+            </div>
+          </div>
+
+          <div class="summary">
+            <div class="metric">
+              <small>Расчётная масса</small>
+              <strong id="weight">850 г</strong>
+              <em>Без полезной нагрузки</em>
+            </div>
+            <div class="metric">
+              <small>Оценка полёта</small>
+              <strong id="flight">12–18 мин</strong>
+              <em>Приблизительно</em>
+            </div>
+            <div class="metric">
+              <small>Конфигурация</small>
+              <strong id="className">PRO</strong>
+              <em>Пользовательская</em>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <strong>КОМПЛЕКТАЦИЯ</strong>
+            <small>Настрой параметры</small>
+          </div>
+
+          <div class="component-list">
+            <div class="component">
+              <div class="component-top">
+                <div class="component-icon">⬡</div>
+                <div class="component-label">
+                  <strong>Рама</strong>
+                  <small>Основа конструкции</small>
+                </div>
+              </div>
+              <select id="frame">
+                <option value="0">Carbon Pro 5″ — $90</option>
+                <option value="1">Long Range 7″ — $145</option>
+                <option value="2">Compact 3″ — $65</option>
+              </select>
+            </div>
+
+            <div class="component">
+              <div class="component-top">
+                <div class="component-icon">◉</div>
+                <div class="component-label">
+                  <strong>Моторы (комплект 4 шт.)</strong>
+                  <small>Тяга и эффективность</small>
+                </div>
+              </div>
+              <select id="motors">
+                <option value="0">Performance 2207 — $120</option>
+                <option value="1">Efficiency 2004 — $105</option>
+                <option value="2">Power 2806.5 — $160</option>
+              </select>
+            </div>
+
+            <div class="component">
+              <div class="component-top">
+                <div class="component-icon">▰</div>
+                <div class="component-label">
+                  <strong>Контроллер полёта</strong>
+                  <small>Управление системой</small>
+                </div>
+              </div>
+              <select id="fc">
+                <option value="0">F7 Advanced — $110</option>
+                <option value="1">H7 Pro — $165</option>
+                <option value="2">F405 Standard — $75</option>
+              </select>
+            </div>
+
+            <div class="component">
+              <div class="component-top">
+                <div class="component-icon">▣</div>
+                <div class="component-label">
+                  <strong>Аккумулятор</strong>
+                  <small>Источник питания</small>
+                </div>
+              </div>
+              <select id="battery">
+                <option value="0">LiPo 6S 1300 mAh — $55</option>
+                <option value="1">LiPo 6S 1500 mAh — $70</option>
+                <option value="2">Li-ion Long Range — $115</option>
+              </select>
+            </div>
+
+            <div class="component">
+              <div class="component-top">
+                <div class="component-icon">◈</div>
+                <div class="component-label">
+                  <strong>Камера</strong>
+                  <small>Изображение и видео</small>
+                </div>
+              </div>
+              <select id="camera">
+                <option value="0">HD Digital — $180</option>
+                <option value="1">Analog FPV — $45</option>
+                <option value="2">Action Camera Setup — $320</option>
+              </select>
+            </div>
+
+            <div class="component">
+              <div class="component-top">
+                <div class="component-icon">⌁</div>
+                <div class="component-label">
+                  <strong>Система связи</strong>
+                  <small>Приёмник и передача данных</small>
+                </div>
+              </div>
+              <select id="radio">
+                <option value="0">Digital Link — $95</option>
+                <option value="1">ExpressLRS — $35</option>
+                <option value="2">Long Range Link — $125</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="padding:0 17px 18px">
+            <button class="button" id="saveConfig" style="width:100%">
+              ⇪ Поделиться конфигурацией
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="cost-panel">
+        <div class="cost-row">
+          <div>
+            <small>ОБЩАЯ СТОИМОСТЬ КОМПЛЕКТАЦИИ</small>
+            <div class="cost-total" id="totalCost">$650</div>
+          </div>
+          <span class="pill">USD · DEMO PRICES</span>
+        </div>
+        <p>
+          Это ориентировочная стоимость выбранных деталей, а не коммерческое предложение.
+          Не включены доставка, инструменты, зарядное устройство и возможные дополнительные
+          компоненты. Совместимость необходимо проверять отдельно.
+        </p>
+      </div>
+    </section>
+
+    <section id="parts">
+      <div class="section-head">
+        <div>
+          <h2>Из чего состоит дрон?</h2>
+          <p>Каждая деталь выполняет свою задачу.</p>
+        </div>
+      </div>
+
+      <div class="parts-grid">
+        <article class="part-card">
+          <div class="part-symbol">⬡</div>
+          <h3>Рама</h3>
+          <p>Удерживает компоненты и воспринимает механические нагрузки. Влияет на размер, массу и жёсткость.</p>
+        </article>
+        <article class="part-card">
+          <div class="part-symbol">◉</div>
+          <h3>Бесколлекторные моторы</h3>
+          <p>Вращают пропеллеры. Выбор зависит от размера рамы, питания и характеристик пропеллеров.</p>
+        </article>
+        <article class="part-card">
+          <div class="part-symbol">▰</div>
+          <h3>Контроллер полёта</h3>
+          <p>Обрабатывает данные датчиков и управляет полётом через электронные регуляторы оборотов.</p>
+        </article>
+        <article class="part-card">
+          <div class="part-symbol">▣</div>
+          <h3>Аккумулятор</h3>
+          <p>Питает систему. Важны напряжение, ёмкость, допустимый ток, масса и подходящий зарядный режим.</p>
+        </article>
+        <article class="part-card">
+          <div class="part-symbol">◈</div>
+          <h3>Камера</h3>
+          <p>Может передавать изображение пилоту или записывать видео. Эти задачи иногда требуют разных камер.</p>
+        </article>
+        <article class="part-card">
+          <div class="part-symbol">⌁</div>
+          <h3>Связь и управление</h3>
+          <p>Приёмник получает команды пилота. Видеосвязь и телеметрия могут использовать отдельные системы.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="guide">
+      <div class="section-head">
+        <div>
+          <h2>Путь от идеи до полёта</h2>
+          <p>Основные этапы проектирования собственного дрона.</p>
+        </div>
+      </div>
+
+      <div class="steps">
+        <article class="step">
+          <div class="step-num">STEP 01 / PLAN</div>
+          <h3>Определи задачу</h3>
+          <p>Реши, нужен ли дрон для обучения, съёмки, гонок или длительного полёта.</p>
+        </article>
+        <article class="step">
+          <div class="step-num">STEP 02 / DESIGN</div>
+          <h3>Подбери детали</h3>
+          <p>Сопоставь раму, моторы, пропеллеры, регуляторы, аккумулятор и контроллер.</p>
+        </article>
+        <article class="step">
+          <div class="step-num">STEP 03 / BUILD</div>
+          <h3>Собери систему</h3>
+          <p>Изучи электрическую схему, крепления, изоляцию соединений и требования производителей.</p>
+        </article>
+        <article class="step">
+          <div class="step-num">STEP 04 / TEST</div>
+          <h3>Проверь безопасность</h3>
+          <p>Проведи проверку без пропеллеров, настрой датчики и выполняй тесты только в безопасном месте.</p>
+        </article>
+      </div>
+
+      <div class="notice">
+        <strong>Важно:</strong> 3D-модель на этой странице — визуальная демонстрация,
+        а характеристики и стоимость — приблизительные оценки, не результаты инженерного
+        моделирования. Перед реальной сборкой проверь электрическую совместимость,
+        токовые нагрузки, крепления и требования местных правил полётов.
+        Все первоначальные проверки электроники выполняй с отключёнными пропеллерами.
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <a class="logo" href="#home"><span class="logo-icon">✦</span> Drone<span>Lab</span></a>
+    <span>Проектируй. Изучай. Создавай. © <span id="year"></span></span>
+    <span>DRONELAB / PERSONAL PROJECT</span>
+  </div>
+</footer>
+
+<!-- Capacitor — "мостик" между страницей и телефоном.
+     Нужен, чтобы из JavaScript вызвать системное окно "Поделиться".
+     В обычном браузере этот файл тоже грузится, но просто ничего не делает. -->
+<script src="libs/capacitor.js"></script>
+
+<!-- Вся логика сайта и 3D-сцены -->
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
